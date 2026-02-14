@@ -30,7 +30,9 @@ class button{
 			SDL_RenderFillRect(prenderer, &rectangle_w);
 		
 			dibujarCirculoRelleno(prenderer, (rectangle.x+(rectangle_h.w/2)), (rectangle.y-(rectangle_w.h/2))-1, rradio, true, false, false, false);
-			dibujarCirculoRelleno(prenderer, 300, 300, rradio, false, true, false, false);
+			dibujarCirculoRelleno(prenderer, (rectangle.x-(rectangle_h.w/2))-1, (rectangle.y-(rectangle_w.h/2))-1, rradio, false, true, false, false);
+			dibujarCirculoRelleno(prenderer, (rectangle.x-(rectangle_h.w/2))-1, (rectangle.y+(rectangle_w.h/2)), rradio, false, false, true, false);
+			dibujarCirculoRelleno(prenderer, (rectangle.x+(rectangle_h.w/2)), (rectangle.y+(rectangle_w.h/2)), rradio, false, false, false, true);
 			dibujarCirculoRelleno(prenderer, 300, 300, rradio, false, false, true, false);
 			dibujarCirculoRelleno(prenderer, 300, 300, rradio, false, false, false, true);
 		}
@@ -81,6 +83,9 @@ int main(){
 
 		button button_2 = button(100, 200, 50, 50, {100, 0, 100, 255}, 5);
 		button_2.draw_button(prenderer);
+
+		button botonvelde = button(300, 300, 80, 80, {100, 100, 50, 170}, 20);
+		botonvelde.draw_button(prenderer);
 		
 		SDL_RenderPresent(prenderer);
 
