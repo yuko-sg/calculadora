@@ -36,7 +36,7 @@ class button{
 			dibujarCirculoRelleno(prenderer, 300, 300, rradio, false, false, true, false);
 			dibujarCirculoRelleno(prenderer, 300, 300, rradio, false, false, false, true);
 		}
-
+		
 	};
 
 int main(){
@@ -55,8 +55,7 @@ int main(){
 	
 	SDL_Event evento;
 	bool corriendo = true;
-
-	int x = 0;		
+	
 	
 	//aqui se dibuja el entorno, esto es lo que se repite constantemente.
 	while(corriendo == true){
@@ -69,32 +68,11 @@ int main(){
 		SDL_SetRenderDrawColor(prenderer, 0, 0, 0, 255);
 		SDL_RenderClear(prenderer);
 	
-		SDL_Rect rectangle = {100, 100, 50, 50}; 
-		SDL_SetRenderDrawColor(prenderer, 255, 0, 0, 255);
-		SDL_RenderFillRect(prenderer, &rectangle);
-
-		dibujarCirculo(prenderer, 400, 50, 30);
-
-		dibujarCirculoRelleno(prenderer, 300, 300, 20, true, false, true, false);
-		
-		button button_1 = button(x, 200, 50, 50, {0, 0, 255, 255}, 10);
-		button_1.draw_button(prenderer);
+		button boton1 = button (100, 100, 30, 30, {200, 130, 130, 100}, 10);
 	
-
-		button button_2 = button(100, 200, 50, 50, {100, 0, 100, 255}, 5);
-		button_2.draw_button(prenderer);
-
-		button botonvelde = button(300, 300, 80, 80, {100, 100, 50, 170}, 20);
-		botonvelde.draw_button(prenderer);
-		
+		boton1.draw_button(prenderer);
+	
 		SDL_RenderPresent(prenderer);
-
-
-		x += 1;
-
-		if(x >= 1100){
-			x = 0;
-		}
 	
 	}
 	
