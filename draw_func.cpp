@@ -1,86 +1,4 @@
-#include <iostream>
-#include <SDL.h>
-
-void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio);
-
-void dibujarCirculoRelleno(SDL_Renderer* renderer, int centroX, int centroY, int radio, bool c1, bool c2, bool c3, bool c4);
-
-class button{
-	private:
-		SDL_Rect rectangle;
-		SDL_Rect rectangle_h;
-		SDL_Rect rectangle_w;
-		SDL_Color color;
-		int rradio;
-
-	public:
-		button(int x, int y, int width, int height, SDL_Color c, int radio){
-			rectangle_h = {((x-(width/2))+radio), (y-(height/2)), (width-(radio*2)), height};
-			rectangle_w = {(x-(width/2)), ((y-(height/2))+radio), width, (height-(radio*2))};
-			color = c;
-			rectangle = {x, y, width, height};
-			rradio = radio;
-		}
-
-
-		void draw_button(SDL_Renderer* prenderer){
-
-			SDL_SetRenderDrawColor(prenderer, color.r, color.g, color.b, color.a);
-			SDL_RenderFillRect(prenderer, &rectangle_h);
-			SDL_RenderFillRect(prenderer, &rectangle_w);
-		
-			dibujarCirculoRelleno(prenderer, (rectangle.x+(rectangle_h.w/2)), (rectangle.y-(rectangle_w.h/2))-1, rradio, true, false, false, false);
-			dibujarCirculoRelleno(prenderer, (rectangle.x-(rectangle_h.w/2))-1, (rectangle.y-(rectangle_w.h/2))-1, rradio, false, true, false, false);
-			dibujarCirculoRelleno(prenderer, (rectangle.x-(rectangle_h.w/2))-1, (rectangle.y+(rectangle_w.h/2)), rradio, false, false, true, false);
-			dibujarCirculoRelleno(prenderer, (rectangle.x+(rectangle_h.w/2)), (rectangle.y+(rectangle_w.h/2)), rradio, false, false, false, true);
-			dibujarCirculoRelleno(prenderer, 300, 300, rradio, false, false, true, false);
-			dibujarCirculoRelleno(prenderer, 300, 300, rradio, false, false, false, true);
-		}
-		
-	};
-
-int main(){
-
-	SDL_Window* pwindow = SDL_CreateWindow("calculadora", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 600, 0);
-	
-	if(!pwindow){
-		std::cout << "no jala" << std::endl;
-	}
-
-		
-	SDL_Renderer* prenderer = SDL_CreateRenderer(pwindow, -1, SDL_RENDERER_ACCELERATED);
-	
-	SDL_Surface* psurface = SDL_GetWindowSurface(pwindow);
-	SDL_FillRect(psurface, NULL, 0xFF00FF);
-	
-	SDL_Event evento;
-	bool corriendo = true;
-	
-	
-	//aqui se dibuja el entorno, esto es lo que se repite constantemente.
-	while(corriendo == true){
-		while(SDL_PollEvent(&evento)){
-			if(evento.type == SDL_QUIT){
-				corriendo = false;	
-			}
-		}
-
-		SDL_SetRenderDrawColor(prenderer, 0, 0, 0, 255);
-		SDL_RenderClear(prenderer);
-	
-		button boton1 = button (100, 100, 30, 30, {200, 130, 130, 100}, 10);
-	
-		boton1.draw_button(prenderer);
-	
-		SDL_RenderPresent(prenderer);
-	
-	}
-	
-	SDL_DestroyRenderer(prenderer);
-        SDL_DestroyWindow(pwindow); 
-     	SDL_Quit();
-			
-}
+#include "draw_func.h"
 
 void dibujarCirculo(SDL_Renderer* renderer, int centroX, int centroY, int radio) {
     int x = radio - 1;
@@ -159,6 +77,4 @@ void dibujarCirculoRelleno(SDL_Renderer* renderer, int centroX, int centroY, int
     }
 
 }
-
-
 
